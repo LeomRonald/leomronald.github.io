@@ -1,0 +1,519 @@
+<!doctype html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<title>丝·路</title>
+
+</head>
+
+<body>
+
+	<script type="text/template" id="changan">
+	
+		<iframe src="page/长安1.html" marginwidth="0" marginheight="0" height="99%" width="100%" frameborder="0" style="padding: 0"></iframe>
+	
+	</script>
+
+	<script type="text/template" id="lanzhou">
+
+		<iframe src="page/兰州2.html" marginwidth="0" marginheight="0" height="99%" width="100%" frameborder="0" style="padding: 0"></iframe>
+
+
+	</script>
+	
+	<script  type="text/template" id="wuwei">
+
+		<iframe src="page/武威3.html" marginwidth="0" marginheight="0" height="99%" width="100%" frameborder="0" style="padding: 0"></iframe>
+
+	</script>
+
+	<script  type="text/template" id="jiayu">
+		<iframe src="page/嘉峪关4.html" marginwidth="0" marginheight="0" height="99%" width="100%" frameborder="0" style="padding: 0"></iframe>
+	</script>
+	
+	<script  type="text/template" id="dunhuang">
+		<iframe src="page/敦煌5.html" marginwidth="0" marginheight="0" height="99%" width="100%" frameborder="0" style="padding: 0"></iframe>
+	</script>
+	
+	<script  type="text/template" id="loulan">
+		<iframe src="page/楼兰6.html" marginwidth="0" marginheight="0" height="99%" width="100%" frameborder="0" style="padding: 0"></iframe>
+	</script>
+	
+	<script  type="text/template" id="hetian">
+		<iframe src="page/和田7.html" marginwidth="0" marginheight="0" height="99%" width="100%" frameborder="0" style="padding: 0"></iframe>
+	</script>
+	
+	<script  type="text/template" id="shule">
+		<iframe src="page/疏勒8.html" marginwidth="0" marginheight="0" height="99%" width="100%" frameborder="0" style="padding: 0"></iframe>
+	</script>
+
+    
+	<div id="container"></div>
+	
+	<link rel="stylesheet" href="css/photo-sphere-viewer.css">
+
+    <script src="js/three.js"></script>
+
+    <script src="js/doT.js"></script>
+    <script src="js/uevent.js"></script>
+	<script src="js/D.js"></script>
+	<script src="js/DeviceOrientationControls.js"></script>
+
+    <script src="js/photo-sphere-viewer.js"></script>
+
+<script>
+	function city(wMIN,hMIN,wMAX,hMAX){
+		this.loMIN = wMIN;		this.loMAX = wMAX;
+		this.laMIN = hMIN;		this.laMAX = hMAX;
+		this.longitude = (this.loMIN+this.loMAX)/2;
+		this.latitude = (this.laMIN+this.laMAX)/2;
+		this.tipsinvisible = true;
+	}
+	
+	var ca = new city(1.79,0.1,2.31,0.41);
+	var lz = new city(2.46,-0.48,2.98,-0.12);
+	var ww = new city(3.17,0.22,3.73,0.55);
+	var jy = new city(3.95,-0.5,4.52,-0.15);
+	var dh = new city(4.96,0.18,5.54,0.52);
+	var ll = new city(5.57,-0.39,6.28,-0.08);
+	var ht = new city(0.32,0.32,0.95,0.64);
+	var sl = new city(1.05,-0.39,1.57,-0.08);
+	
+var div = document.getElementById('container');
+var PSV = new PhotoSphereViewer({
+
+    panorama: 'images/sl.jpg',
+ 
+    
+    container: div,
+ 
+
+    time_anim: false,
+	
+	gyroscope: true,//启用陀螺仪
+ 
+
+	 navbar:  [
+	   'autorotate',
+	   'zoom',
+	   'gyroscope',
+	   'markers',
+	   'caption',
+	   'fullscreen'
+	  ],     
+ 
+
+    size: {
+        width: '1200px',
+        height: '720px'
+    },
+	
+ 
+    // 限制顶部
+    // tilt_up_max: Math.PI / 7,       
+ 
+    // 限制底部
+    // tilt_down_max: Math.PI / 7     
+	
+//按钮提示
+lang: {
+	autorotate: '自动旋转',
+	zoom: '缩放',
+	zoomOut: '缩小',
+	zoomIn: '放大',
+	fullscreen: '全屏展示',
+	markers: '快速定位',
+	gyroscope: '陀螺仪'
+},
+
+// 标记列表
+markers: [
+{
+// 展示长安
+	id: 'CA',
+	longitude: ca.longitude,
+	latitude: ca.laMIN,
+	image: 'http://photo-sphere-viewer.js.org/assets/pin-blue.png',
+	width: 32,
+	height: 32,
+	anchor: 'top center',
+	tooltip: '长安. <b>点击查看详细</b>',
+	content: document.getElementById('changan').innerHTML,
+},
+{
+// 展示楼兰
+	id: 'LZ',
+	longitude: lz.longitude,
+	latitude: lz.laMAX,
+	image: 'http://photo-sphere-viewer.js.org/assets/pin-blue.png',
+	width: 32,
+	height: 32,
+	anchor: 'bottom center',
+	tooltip: '兰州. <b>点击查看详细</b>',
+	content: document.getElementById('lanzhou').innerHTML,
+},
+{
+// 展示武威
+	id: 'WW',
+	longitude: ww.longitude,
+	latitude: ww.laMIN,
+	image: 'http://photo-sphere-viewer.js.org/assets/pin-blue.png',
+	width: 32,
+	height: 32,
+	anchor: 'top center',
+	tooltip: '武威. <b>点击查看详细</b>',
+	content: document.getElementById('wuwei').innerHTML,
+},
+{
+// 展示嘉峪关
+	id: 'JY',
+	longitude: jy.longitude,
+	latitude: jy.laMAX,
+	image: 'http://photo-sphere-viewer.js.org/assets/pin-blue.png',
+	width: 32,
+	height: 32,
+	anchor: 'bottom center',
+	tooltip: '嘉峪关. <b>点击查看详细</b>',
+	content: document.getElementById('jiayu').innerHTML,
+},
+{
+// 展示敦煌
+	id: 'DH',
+	longitude: dh.longitude,
+	latitude: dh.laMIN,
+	image: 'http://photo-sphere-viewer.js.org/assets/pin-blue.png',
+	width: 32,
+	height: 32,
+	anchor: 'top center',
+	tooltip: '敦煌. <b>点击查看详细</b>',
+	content: document.getElementById('dunhuang').innerHTML,
+},
+{
+// 展示楼兰
+	id: 'LL',
+	longitude: ll.longitude+0.1,
+	latitude: ll.laMAX,
+	image: 'http://photo-sphere-viewer.js.org/assets/pin-blue.png',
+	width: 32,
+	height: 32,
+	anchor: 'bottom center',
+	tooltip: '楼兰. <b>点击查看详细</b>',
+	content: document.getElementById('loulan').innerHTML,
+},
+{
+// 展示和田
+	id: 'HT',
+	longitude: ht.longitude,
+	latitude: ht.laMIN,
+	image: 'http://photo-sphere-viewer.js.org/assets/pin-blue.png',
+	width: 32,
+	height: 32,
+	anchor: 'top center',
+	tooltip: '和田. <b>点击查看详细</b>',
+	content: document.getElementById('hetian').innerHTML,
+},
+{
+// 展示疏勒
+	id: 'SL',
+	longitude: sl.longitude,
+	latitude: sl.laMAX,
+	image: 'http://photo-sphere-viewer.js.org/assets/pin-blue.png',
+	width: 32,
+	height: 32,
+	anchor: 'bottom center',
+	tooltip: '疏勒. <b>点击查看详细</b>',
+	content: document.getElementById('shule').innerHTML,
+},
+]});
+
+/*function markDis(e,dc){
+	if(e.latitude<dc.laMAX&&e.latitude>dc.laMIN&&e.longitude<dc.loMAX&&e.longitude>dc.loMIN)
+	{
+	PSV.addMarker({
+// 具有自定义样式的html标记
+	id: dc+'text',
+	longitude: dc.loMAX+0.1,
+	latitude: dc.laMAX,
+	width:500,
+	height:600,
+	html: '这有一段文本 ',
+	style: {
+		color: 'white',
+		backgroundColor: 'rgba(61, 61, 61, 0.7)',
+		fontSize: '20px',
+		fontFamily: '宋体',
+		textAlign: 'left',
+	},
+	anchor: 'top left',
+	tooltip: {
+		position: 'top'
+	},
+	data:{
+		generated:true,
+	}
+		
+    })
+	}
+}*/
+	
+PSV.on('click', function (e) {
+	//各地点简介标记
+	if(e.latitude<ca.laMAX&&e.latitude>ca.laMIN&&e.longitude<ca.loMAX&&e.longitude>ca.loMIN&&ca.tipsinvisible)
+	{
+		PSV.addMarker({
+			id: 'cattext',
+			longitude: ca.loMAX+0.1,
+			latitude: ca.laMAX,
+			width:550,
+			height:320,
+			html: '<br>《咏长安》<br>作者：卢照邻<br><br>皇灵帝气瑞弥空，片片祥云处处宫。<br>朗月寒星披汉瓦，疏风密雨裹唐风。<br>巍然城堡姿如旧，卓尔新区靓似虹。<br>胜水名山千载傍，匠师岂敌自然工。',
+			style: {
+				color: 'white',
+				backgroundColor: 'rgba(61, 61, 61, 0.7)',
+				fontSize: '20px',
+				fontFamily: '宋体',
+				textAlign: 'center',
+			},
+			anchor: 'top left',
+			tooltip: {
+				content: '长安',
+				position: 'top'
+			},
+			data:{
+				name:'CA',
+				generated:true,
+			}
+		})
+		ca.tipsinvisible = false;
+	}
+
+	if(e.latitude<lz.laMAX&&e.latitude>lz.laMIN&&e.longitude<lz.loMAX&&e.longitude>lz.loMIN&&lz.tipsinvisible)
+	{
+		PSV.addMarker({
+			id: 'lzttext',
+			longitude: lz.loMAX+0.1,
+			latitude: lz.laMAX,
+			width:450,
+			height:400,
+			html: '<br>《望海潮 上兰州守》<br>作者：邓千江<br><br>云雷天堑，金汤地险，名藩自古皋兰。<br>营屯绣错，山形米聚，襟喉百二秦关。<br>鏖战血犹殷。见阵云冷落，时有雕盘。<br>静塞楼头，晓月依旧玉弓弯。<br>看看定远西还。有元戎阃令，上将斋坛。<br>区脱昼空，兜零夕举，甘泉又报平安。<br>吹笛虎牙间。且宴陪珠履，歌按云鬟。<br>招取英灵，毅魂长绕贺兰山。',
+			style: {
+				color: 'white',
+				backgroundColor: 'rgba(61, 61, 61, 0.7)',
+				fontSize: '20px',
+				fontFamily: '宋体',
+				textAlign: 'center',
+			},
+			anchor: 'top left',
+			tooltip: {
+				content: '兰州',
+				position: 'top'
+			},
+			data:{
+				name:'LZ',
+				generated:true,
+			}
+		})
+		lz.tipsinvisible = false;
+	}
+
+	if(e.latitude<ww.laMAX&&e.latitude>ww.laMIN&&e.longitude<ww.loMAX&&e.longitude>ww.loMIN&&ww.tipsinvisible)
+	{
+		PSV.addMarker({
+			id: 'wwttext',
+			longitude: ww.loMAX+0.1,
+			latitude: ww.laMAX,
+			width:350,
+			height:300,
+			html: '<br>《武威春暮》<br>作者：岑参 <br><br>岸雨过城头，黄鹂上戍楼。<br>塞花飘客泪，边柳挂乡愁。<br>白发悲明镜，青春换敝裘。<br>君从万里使，闻已到瓜州。',
+			style: {
+				color: 'white',
+				backgroundColor: 'rgba(61, 61, 61, 0.7)',
+				fontSize: '20px',
+				fontFamily: '宋体',
+				textAlign: 'center',
+			},
+			anchor: 'top left',
+			tooltip: {
+				content: '武威',
+				position: 'top'
+			},
+			data:{
+				name:'WW',
+				generated:true,
+			}
+		})
+		ww.tipsinvisible = false;
+	}
+	if(e.latitude<jy.laMAX&&e.latitude>jy.laMIN&&e.longitude<jy.loMAX&&e.longitude>jy.loMIN&&jy.tipsinvisible)
+	{
+		PSV.addMarker({
+			id: 'jyttext',
+			longitude: jy.loMAX+0.1,
+			latitude: jy.laMAX,
+			width:340,
+			height:300,
+			html: '<br>《出嘉峪关感赋》<br>作者：林则徐<br><br>长城饮马寒宵月，<br>古戍盘雕大漠风。<br>险是卢龙山海险，<br>东南谁比此关雄。',
+			style: {
+				color: 'white',
+				backgroundColor: 'rgba(61, 61, 61, 0.7)',
+				fontSize: '20px',
+				fontFamily: '宋体',
+				textAlign: 'center',
+			},
+			anchor: 'top left',
+			tooltip: {
+				content: '嘉峪关',
+				position: 'top'
+			},
+			data:{
+				name:'JY',
+				generated:true,
+			}
+		})
+		jy.tipsinvisible = false;
+	}
+	if(e.latitude<dh.laMAX&&e.latitude>dh.laMIN&&e.longitude<dh.loMAX&&e.longitude>dh.loMIN&&dh.tipsinvisible)
+	{
+		PSV.addMarker({
+			id: 'dhttext',
+			longitude: dh.loMAX+0.1,
+			latitude: dh.laMAX,
+			width:400,
+			height:320,
+			html: '<br>《敦煌乐》<br>作者：杨慎<br><br>角声吹彻梅花，胡云遥接秦霞。<br>白雁西风紫塞，皂雕落日黄沙。<br>汉使牧羊旌节，阏氐上马琵琶。<br>梦里身回云阙，觉来泪满天涯。',
+			style: {
+				color: 'white',
+				backgroundColor: 'rgba(61, 61, 61, 0.7)',
+				fontSize: '20px',
+				fontFamily: '宋体',
+				textAlign: 'center',
+			},
+			anchor: 'top left',
+			tooltip: {
+				content: '敦煌',
+				position: 'top'
+			},
+			data:{
+				name:'DH',
+				generated:true,
+			}
+		})
+		dh.tipsinvisible = false;
+	}
+	if(e.latitude<ll.laMAX&&e.latitude>ll.laMIN&&e.longitude<ll.loMAX&&e.longitude>ll.loMIN&&ll.tipsinvisible)
+	{
+		PSV.addMarker({
+			id: 'llttext',
+			longitude: ll.loMAX+0.1,
+			latitude: ll.laMAX,
+			width:300,
+			height:300,
+			html: '<br>《从军行》<br>作者：王昌龄<br><br>青海长云暗雪山，<br>孤城遥望玉门关。<br>黄沙百战穿金甲，<br>不破楼兰终不还！',
+			style: {
+				color: 'white',
+				backgroundColor: 'rgba(61, 61, 61, 0.7)',
+				fontSize: '20px',
+				fontFamily: '宋体',
+				textAlign: 'center',
+			},
+			anchor: 'top left',
+			tooltip: {
+				content: '楼兰',
+				position: 'top'
+			},
+			data:{
+				name:'LL',
+				generated:true,
+			}
+		})
+		ll.tipsinvisible = false;
+	}
+	if(e.latitude<ht.laMAX&&e.latitude>ht.laMIN&&e.longitude<ht.loMAX&&e.longitude>ht.loMIN&&ht.tipsinvisible)
+	{
+		PSV.addMarker({
+			id: 'htttext',
+			longitude: ht.loMAX+0.1,
+			latitude: ht.laMAX,
+			width:300,
+			height:300,
+			html: '<br>《和阗玉》<br>作者：乾隆<br><br>和阗昔于阗，<br>出玉素所称。<br>不知何以出，<br>今乃悉情形。',
+			style: {
+				color: 'white',
+				backgroundColor: 'rgba(61, 61, 61, 0.7)',
+				fontSize: '20px',
+				fontFamily: '宋体',
+				textAlign: 'center',
+			},
+			anchor: 'top left',
+			tooltip: {
+				content: '和田',
+				position: 'top'
+			},
+			data:{
+				name:'HT',
+				generated:true,
+			}
+		})
+		ht.tipsinvisible = false;
+	}
+	if(e.latitude<sl.laMAX&&e.latitude>sl.laMIN&&e.longitude<sl.loMAX&&e.longitude>sl.loMIN&&sl.tipsinvisible)
+	{
+		PSV.addMarker({
+			id: 'slttext',
+			longitude: sl.loMAX+0.1,
+			latitude: sl.laMAX,
+			width:450,
+			height:320,
+			html: '<br>《疏勒怀古》<br>作者：未知<br><br>伯宗何故立刀兵？戍马西疆未敢轻。<br>疏勒苍风袭大漠，金蒲暗雪卷长缨。<br>高楼扬水胡维乱，断弩投锅志更精。<br>此去玉门归旧部，忠魂不驻也留名！',
+			style: {
+				color: 'white',
+				backgroundColor: 'rgba(61, 61, 61, 0.7)',
+				fontSize: '20px',
+				fontFamily: '宋体',
+				textAlign: 'center',
+			},
+			anchor: 'top left',
+			tooltip: {
+				content: '疏勒',
+				position: 'top'
+			},
+			data:{
+				name:'SL',
+				generated:true,
+			}
+		})
+		sl.tipsinvisible = false;
+	}
+
+})
+
+/**
+ * 当用户点击它时，删除一个生成的标记
+ */
+PSV.on('select-marker', function (marker) {
+    if (marker.data && marker.data.generated) {
+		
+		if(marker.data.name=='CA')	ca.tipsinvisible=true;
+		if(marker.data.name=='LZ')	lz.tipsinvisible=true;
+		if(marker.data.name=='WW')	ww.tipsinvisible=true;
+		if(marker.data.name=='JY')	jy.tipsinvisible=true;
+		if(marker.data.name=='DH')	dh.tipsinvisible=true;
+		if(marker.data.name=='LL')	ll.tipsinvisible=true;
+		if(marker.data.name=='HT')	ht.tipsinvisible=true;
+		if(marker.data.name=='SL')	sl.tipsinvisible=true;
+		
+        PSV.removeMarker(marker);
+    }
+}
+);
+	
+PSV.on('ready',function(marker){
+	//var ch=PSV.getMarker('changan');
+	   PSV.gotoMarker('CA',2000);
+});
+	
+	
+</script>
+
+</body>
+</html>
